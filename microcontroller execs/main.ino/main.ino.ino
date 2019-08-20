@@ -2,6 +2,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
+#include "RGB.h"
 
 #define PIN 6
 
@@ -22,5 +23,15 @@ void setup()
 }
 
 void loop() {
-  
+  colorWipe(red, 50);
+}
+
+void colorWipe(RGB color, uint8_t wait) {
+  for(uint16_t row=0; row < 16; row++) {
+    for(uint16_t column=0; column < 16; column++) {
+      matrix.drawPixel(column, row, matrix.Color(color.r, color.g, color.b));
+      matrix.show();
+      delay(wait);
+    }
+  }
 }
